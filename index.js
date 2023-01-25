@@ -20,6 +20,20 @@ async function salvarPessoa(pessoa){
 
 }
 
+async function criarAmizade(email1, email2){
+    var session = driver.session();
+
+    const retorno = await session.run(
+        'MATCH (p1:Pessoa{email:$email1}) OPTIONAL MATCH (p2:Pessoa{email:$email2}) CREATE (p1)-[:AMIGO]->(p2)',
+        {email1: email1,
+        email2: email2});
+
+    console.log(retorno.summary.counters);
+
+    await session.close();
+    await driver.close();
+}
+
 const pessoa = {
     nome:'Ana',
     email:'ana@gmail.com'
