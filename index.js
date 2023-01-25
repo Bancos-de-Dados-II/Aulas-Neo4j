@@ -34,9 +34,24 @@ async function criarAmizade(email1, email2){
     await driver.close();
 }
 
-const pessoa = {
-    nome:'Ana',
-    email:'ana@gmail.com'
+async function listarAmigos(email){
+    var session = driver.session();
+
+    const retorno = await session.run(
+        'MATCH (:Pessoa{email:$email})-[:AMIGO]->(p2) RETURN p2.nome',
+        {email: email});
+
+    console.log(retorno);
+
+    await session.close();
+    await driver.close();
 }
 
-salvarPessoa(pessoa);
+// const pessoa = {
+//     nome:'Ana',
+//     email:'ana@gmail.com'
+// }
+
+// salvarPessoa(pessoa);
+
+// criarAmizade('maria@gmail.com', 'ana@gmail.com');
