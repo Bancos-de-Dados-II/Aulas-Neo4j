@@ -41,7 +41,8 @@ async function listarAmigos(email){
         'MATCH (:Pessoa{email:$email})-[:AMIGO]->(p2) RETURN p2.nome',
         {email: email});
 
-    console.log(retorno);
+    retorno.records.forEach(r => console.log(r._fields[0]));
+
 
     await session.close();
     await driver.close();
@@ -55,3 +56,5 @@ async function listarAmigos(email){
 // salvarPessoa(pessoa);
 
 // criarAmizade('maria@gmail.com', 'ana@gmail.com');
+
+listarAmigos('maria@gmail.com');
