@@ -13,9 +13,16 @@ async function salvarPessoa(pessoa){
         {nome: pessoa.nome,
         email: pessoa.email});
 
-    console.log(retorno);
+    console.log(retorno.summary.counters);
 
     await session.close();
     await driver.close();
 
 }
+
+const pessoa = {
+    nome:'Ana',
+    email:'ana@gmail.com'
+}
+
+salvarPessoa(pessoa);
